@@ -22,3 +22,5 @@
   (re_export dune_sexp)))
 
 (ocamllex dune_file_script)
+
+(ocamllex dune_file_nix)
