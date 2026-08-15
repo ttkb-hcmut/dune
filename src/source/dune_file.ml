@@ -29,6 +29,7 @@ open Memo.O
 
 let fname = "dune"
 let alternative_fname = "dune-file"
+let alternative_fname_nix = "dune.nix"
 
 type kind =
   | Plain
@@ -541,6 +542,10 @@ let load ~dir (status : Source_dir_status.t) project ~files ~parent =
   let file =
     if status = Data_only
     then None
+    else if
+      Dune_project.accept_alternative_dune_file_name project
+      && Filename.Set.mem files alternative_fname_nix
+    then Some alternative_fname_nix
     else if
       Dune_project.accept_alternative_dune_file_name project
       && Filename.Set.mem files alternative_fname
